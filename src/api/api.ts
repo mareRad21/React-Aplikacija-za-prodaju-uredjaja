@@ -67,14 +67,14 @@ async function responseHandler(
         }
         return resolve(response);
     }
-    if(res.data.statusCode <0){
-        const response: ApiResponse = {
+
+    const response: ApiResponse = {
             status: 'ok',
             data: res.data
-        }
-        return resolve(response);
     }
-    resolve(res.data);
+    
+    return resolve(response);
+    
 }
 
 function getToken(): string{
