@@ -79,14 +79,14 @@ async function responseHandler(
 
 function getToken(): string{
     const token = localStorage.getItem('api_token');
-    return 'Bearer' + token;
+    return 'Bearer ' + token;
 }
 export function saveToken(token:string){
     localStorage.setItem('api_token', token);
 }
 function getRefreshToken():string {
     const token = localStorage.getItem('api_refresh_token');
-    return token+'';
+    return token + '';
 }
 export function saveRefreshToken(token:string){
     localStorage.setItem('api_refresh_token', token);
@@ -130,7 +130,7 @@ async function repeatRequest(
             } else{
                 response = {
                     status: 'ok',
-                    data: res,
+                    data: res.data,
                 };
             }
             
