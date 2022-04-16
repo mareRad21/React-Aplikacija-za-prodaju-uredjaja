@@ -30,14 +30,9 @@ class HomePage extends React.Component {
     this.getCategories();
   }
 
-  componentDidUpdate(){
-    this.getCategories();
-  }
-
   private getCategories(){
     api('api/category/','get', {})
     .then((res: ApiResponse) => {
-      console.log(res);
       if(res.status === "error" || res.status === "login"){
         this.setLogginState(false);
         return;
@@ -93,13 +88,13 @@ class HomePage extends React.Component {
 
   private singleCategory(category: CategoryType){
     return(
-      <Col md="3">
-        <Card>
+      <Col lg="3" md="4" sm ="6" xs ="12" >
+        <Card className="mb-3">
           <Card.Body>
-            <Card.Title>
+            <Card.Title as="p">
               {category.name}
             </Card.Title>
-            <Link to={`/category/${category.categoryId}`} className="btn btn-primary">
+            <Link to={`/category/${category.categoryId}`} className="btn btn-primary d-block btn-sm">
               Open category
             </Link>
           </Card.Body>

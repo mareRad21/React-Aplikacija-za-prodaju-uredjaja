@@ -21,7 +21,7 @@ export default function api(
         axios(requestData)
         .then(res=> responseHandler(res, resolve))
         .catch(async err=> {
-            if(err.response.status===401){
+            if(err.response.status === 401){
                 const newToken = await refreshToken();
                 
                 if(!newToken){
@@ -59,19 +59,19 @@ async function responseHandler(
     res: AxiosResponse<any>,
     resolve: (value?: ApiResponse) => void, 
 ) {
-    if(res.status <200 || res.status>=300){
+    if(res.status <200 || res.status >= 300){
         
         const response: ApiResponse = {
             status: 'error',
             data: res.data
-        }
+        };
         return resolve(response);
     }
 
     const response: ApiResponse = {
             status: 'ok',
             data: res.data
-    }
+    };
     
     return resolve(response);
     
@@ -95,7 +95,7 @@ async function refreshToken(): Promise<string | null> {
     const path = 'auth/user/refresh';
     const data = {
         token: getRefreshToken()
-    }
+    };
 
     const refreshTokenRequestData: AxiosRequestConfig = {
         method: 'post',
@@ -103,11 +103,11 @@ async function refreshToken(): Promise<string | null> {
         baseURL: ApiConfig.API_URL,
         data: JSON.stringify(data),
         headers:{
-            'Content-Type': 'aplication/json',
+            'Content-Type': 'application/json',
         }
     };
 
-    const refreshTokenResponse:{data: {token:string | undefined}} = await axios(refreshTokenRequestData);
+    const refreshTokenResponse: {data: { token:string | undefined } } = await axios(refreshTokenRequestData);
 
     if(!refreshTokenResponse.data.token){
         return null;
